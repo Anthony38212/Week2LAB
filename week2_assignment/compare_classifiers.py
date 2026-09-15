@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.svm import LinearSVC
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
@@ -15,6 +16,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 models = {
     'Linear SVM': LinearSVC(max_iter=10000),
     'k-NN (k=5)': KNeighborsClassifier(n_neighbors=5),
+    'Random Forest': RandomForestClassifier(n_estimators=200, random_state=42),
 }
 
 results = {}

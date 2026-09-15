@@ -9,6 +9,12 @@ Image and Scene Recognition, Department of Smart Computing, Kyungdong University
 - `images/` — sample photos used for gradient/HOG visualization.
 - `dataset/` — 3-class image dataset (`cats`, `dogs`, `birds`) used for training.
 
+## Dataset Sources
+
+- **Cats:** images collected via Google Image search.
+- **Dogs:** images collected via Google Image search.
+- **Birds:** images collected via Google Image search.
+
 ## Results Summary
 
-The best accuracy achieved was **0.60 (60%)**, produced by a **Linear SVM** trained on HOG features extracted with **Setting A** (`orientations=9, pixels_per_cell=(8, 8), cells_per_block=(2, 2)`, 8100-dimensional feature vectors), outperforming a k-NN (k=5) classifier on the same features, which reached 0.40 (40%) accuracy. Full breakdown, classification reports, confusion matrices, and written analysis are in [`lab_report.md`](lab_report.md) and [`week2_assignment/analysis.md`](week2_assignment/analysis.md).
+The best accuracy achieved was **0.60 (60%)**, produced by a **Linear SVM** trained on HOG features extracted with **Setting A** (`orientations=9, pixels_per_cell=(8, 8), cells_per_block=(2, 2)`, 8100-dimensional feature vectors). For comparison, a bonus Random Forest classifier reached 0.50 (50%) and a k-NN (k=5) classifier reached 0.40 (40%) on the same features — Linear SVM was the strongest of the three. Full breakdown, classification reports, confusion matrices, and written analysis are in [`lab_report.md`](lab_report.md) and [`week2_assignment/analysis.md`](week2_assignment/analysis.md).

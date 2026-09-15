@@ -15,3 +15,15 @@ Looking across both confusion matrices, the most confused pair is **birds vs. ca
 ## 4. Real-world industry scenario for HOG + classical classifier
 
 A strong real-world fit for a lightweight HOG + classical classifier pipeline (over a deep CNN) is **basic security camera motion/shape filtering** — for example, an embedded camera at a warehouse entrance that needs to distinguish "a person walked into frame" from "a leaf blew across frame" or "a car passed by," running entirely on-device with no GPU and limited power. HOG + Linear SVM can run in milliseconds on a low-power embedded chip, doesn't need a large labeled dataset or cloud connectivity to retrain, and is fully interpretable — an engineer can visually inspect exactly what gradient pattern triggered a detection, which matters for debugging false alarms in a security context. A deep CNN would likely be more accurate in complex, cluttered scenes, but its computational cost and power draw make it a poor fit for a cheap, battery- or solar-powered camera that just needs a reliable, cheap, real-time shape filter before deciding whether to bother uploading footage or waking a more expensive analysis pipeline.
+
+## Task 5 (Bonus) — Random Forest Comparison
+
+Adding a Random Forest classifier (`n_estimators=200`) to the comparison on Setting A features gives:
+
+| Classifier | Accuracy |
+|---|---|
+| Linear SVM | **0.60** |
+| Random Forest | 0.50 |
+| k-NN (k=5) | 0.40 |
+
+Random Forest lands between the other two — better than k-NN but still behind Linear SVM. This **does not change the overall conclusion**: Linear SVM remains the best classifier for this dataset and feature setting. Random Forest's own confusion matrix shows an interesting failure mode: it gets **perfect precision on birds (1.00)** but very low recall (0.33) — meaning when it does predict "birds" it's always right, but it's overly conservative and misses most actual birds, instead defaulting many of them to "dogs." This tracks with how Random Forest works: it builds many decision trees, each splitting on individual HOG feature thresholds, which tends to work well when a few features are strongly discriminative but struggles to combine the more spread-out, gradual patterns across all 8100 dimensions the way SVM's single weighted hyperplane can. With more training data, Random Forest would likely close this gap somewhat, but on this small dataset Linear SVM's ability to use all dimensions jointly gives it the edge.
