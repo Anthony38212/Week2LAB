@@ -1,7 +1,8 @@
 """Week 2 Assignment - Task 3 (+ Task 5 bonus): compare classifiers on HOG features.
 
 Trains Linear SVM, k-NN (k=5) and (bonus) Random Forest on the Setting A HOG
-features produced by extract_features.py, and prints accuracy, a
+features produced by extract_features.py, using an 80/20 stratified
+train/test split, and prints accuracy, a
 classification report and a confusion matrix for each, followed by a summary
 table.
 
@@ -24,10 +25,10 @@ X = np.load('features_setting_A.npy')
 y = np.load('labels_setting_A.npy')
 class_names = np.load('class_names.npy', allow_pickle=True)
 
-# Stratified split keeps class proportions equal in both sets; a fixed
-# random_state makes the split reproducible
+# 80/20 split as required by Task 1; stratify keeps class proportions equal
+# in both sets, and a fixed random_state makes the split reproducible
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42, stratify=y
+    X, y, test_size=0.2, random_state=42, stratify=y
 )
 
 models = {
