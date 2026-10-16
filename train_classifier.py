@@ -1,3 +1,10 @@
+"""Week 2 Lab - Part 4: train a Linear SVM on HOG features.
+
+Code from Step 4.1 of the Week 2 Lab Tutorial (Image and Scene Recognition,
+Kyungdong University). Uses skimage.feature.hog and scikit-learn.
+
+Run from the repository root:  python train_classifier.py
+"""
 import os
 import cv2
 import numpy as np
@@ -6,11 +13,12 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-DATASET_DIR = 'dataset'
-IMG_SIZE = (128, 128)
+DATASET_DIR = 'dataset'   # one subfolder per class
+IMG_SIZE = (128, 128)     # fixed size so every HOG vector has the same length
 
 
 def extract_hog_features(image_path):
+    """Load an image as grayscale, resize it, and return its HOG feature vector."""
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, IMG_SIZE)
     features = hog(
@@ -20,11 +28,13 @@ def extract_hog_features(image_path):
     return features
 
 
+# Build the feature matrix X and label vector y; the label is the class folder's index
 X, y = [], []
 class_names = sorted(os.listdir(DATASET_DIR))
 for label_idx, class_name in enumerate(class_names):
     class_folder = os.path.join(DATASET_DIR, class_name)
-    for filename in os.listdir(class_folder):
+    # sorted() keeps the sample order identical on every OS, for reproducibility
+    for filename in sorted(os.listdir(class_folder)):
         path = os.path.join(class_folder, filename)
         try:
             X.append(extract_hog_features(path))
@@ -36,6 +46,7 @@ X = np.array(X)
 y = np.array(y)
 print(f'Dataset: {X.shape[0]} samples, {X.shape[1]} features each')
 
+# Stratified split, as in the lab tutorial
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=y
 )
