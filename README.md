@@ -8,7 +8,7 @@ Image and Scene Recognition, Department of Smart Computing, Kyungdong University
 - `week2_assignment/` — Week 2 Coding Assignment (two HOG parameter settings, Linear SVM vs k-NN comparison, written analysis).
 - `images/` — sample photos used for gradient/HOG visualization.
 - `dataset/` — 3-class image dataset (`cats`, `dogs`, `birds`) used for training.
-- `cnn_labs/` — Week 3 Lab (`Week3_CNN_Lab_YourID.ipynb`, CNN from scratch on CIFAR-10, 73.7% test accuracy) and Week 4 Lab (`Week4_Transfer_Lab_YourID.ipynb`, transfer learning with ResNet-18 on 5,000 images: scratch 50.4% < feature extraction 71.8% < fine-tuned 77.8% test accuracy). CIFAR-10 is downloaded automatically into `cnn_labs/data/` and is not committed.
+- `cnn_labs/` — Week 3 Lab (`Week3_CNN_Lab_2417163.ipynb`, CNN from scratch on CIFAR-10, 73.7% test accuracy) and Week 4 Lab (`Week4_Transfer_Lab_2417163.ipynb`, transfer learning with ResNet-18 on 5,000 images: scratch 50.4% < feature extraction 71.8% < fine-tuned 77.8% test accuracy). CIFAR-10 is downloaded automatically into `cnn_labs/data/` and is not committed.
 
 ## Dataset Sources
 
